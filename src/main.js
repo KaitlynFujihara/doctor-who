@@ -8,9 +8,14 @@ $(document).ready(function() {
     let promise = search(searchString, searchLocation);
     promise.then(function(response) {
       response.data.forEach(function(doctor) {
-        $('.showresults').text('');
-        $('.showResults').append(`<div class="col-md-6 center"><h3>${doctor.profile.first_name} ${doctor.profile.last_name}, ${doctor.profile.title}</h3><p>${doctor.profile.bio}</p><hr></div>`);
-      });
+        $('.doctors').text(`There are ${doctor.total_doctors} doctor(s) that match your request`)
+        // if (doctor.total_doctors == 0 ) { <== this doesn't work
+        //   $(".showError").text("I'm sorry there are no doctor's available!")
+        // }
+        // else {
+          $('.showResults').append(`<div class="col-md-6 center"><h3>${doctor.profile.first_name} ${doctor.profile.last_name}, ${doctor.profile.title}</h3><h5>${doctor.practices[0].visit_address.street}, ${doctor.practices[0].visit_address.city} ${doctor.practices[0].visit_address.state}</h5><p>Phone: ${doctor.practices[0].phones[0].number}</p><p>${doctor.practices[0].website}</p><p>${doctor.profile.bio}</p><p>Accepts New Patients: ${doctor.practices[0].accepts_new_patients}</p><hr></div>`);
+          // }
+        });
     }, handleErrors);
   }
 
@@ -18,15 +23,19 @@ $(document).ready(function() {
     let promise = searchName(name);
     promise.then(function(response) {
       response.data.forEach(function(doctor) {
-        $('.showresults').text('');
-        $('.showResults').append(`<div class="col-md-6 center"><h3>${doctor.profile.first_name} ${doctor.profile.last_name},  ${doctor.profile.title}</h3><p>${doctor.profile.bio}</p><hr></div>`);
-      });
+        // if (doctor.total_doctors == 0) {  <== this doesn't work
+        //   $('.doctors').text(`There are ${doctor.total_doctors} doctor(s) that match your request`)          }
+        // else {
+          $('.showResults').append(`<div class="col-md-6 center"><h3>${doctor.profile.first_name} ${doctor.profile.last_name}, ${doctor.profile.title}</h3><h5>${doctor.practices[0].visit_address.street}, ${doctor.practices[0].visit_address.city} ${doctor.practices[0].visit_address.state}</h5><p>Phone: ${doctor.practices[0].phones[0].number}</p><p>${doctor.practices[0].website}</p><p>${doctor.profile.bio}</p><p>Accepts New Patients: ${doctor.practices[0].accepts_new_patients}</p><hr></div>`);
+        });
     }, handleErrors);
   }
 
   function handleErrors(error) {
   $(".showError").text("I'm sorry there was an error! " + error);
   }
+
+
 
   $('#symptom').submit(function(event) {
     event.preventDefault();
