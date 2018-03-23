@@ -9,7 +9,7 @@ $(document).ready(function() {
     promise.then(function(response) {
       response.data.forEach(function(doctor) {
         $('.showresults').text('');
-        $('.showResults').append(`<div class="well">${doctor.profile.first_name} <br> ${doctor.profile.last_name} ${doctor.profile.title}<br>${doctor.profile.bio}<br>${doctor.practices.accepts_new_patients}</div>`);
+        $('.showResults').append(`<div class="col-md-6 center"><h3>${doctor.profile.first_name} ${doctor.profile.last_name}, ${doctor.profile.title}</h3><p>${doctor.profile.bio}</p><hr></div>`);
       });
     }, handleErrors);
   }
@@ -19,7 +19,7 @@ $(document).ready(function() {
     promise.then(function(response) {
       response.data.forEach(function(doctor) {
         $('.showresults').text('');
-        $('.showResults').append(`<div class="well">${doctor.profile.first_name} ${doctor.profile.last_name} ${doctor.profile.title}<br>${doctor.profile.bio}<br></div>`);
+        $('.showResults').append(`<div class="col-md-6 center"><h3>${doctor.profile.first_name} ${doctor.profile.last_name},  ${doctor.profile.title}</h3><p>${doctor.profile.bio}</p><hr></div>`);
       });
     }, handleErrors);
   }
